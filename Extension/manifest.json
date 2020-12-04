@@ -1,0 +1,26 @@
+{
+  "name": "MinuteMed",
+  "version": "1.0",
+  "description": "MinuteMed Extension",
+  "permissions": ["declarativeContent","storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/mm16.png",
+      "32": "images/mm32.png",
+      "48": "images/mm48.png",
+      "128": "images/mm128.png"
+    },
+    "icons": {
+      "16": "images/mm16.png",
+      "32": "images/mm32.png",
+      "48": "images/mm48.png",
+      "128": "images/mm128.png"
+    }
+  },
+  "manifest_version": 2
+}
