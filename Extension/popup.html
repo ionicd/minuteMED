@@ -2,15 +2,114 @@
 <html>
   <head>
     <style>
-      button {
-        height: 30px;
-        width: 30px;
-        outline: none;
+      body {
+        min-width:300px;
+      }
+      /* limit on max width, I think it is 800px */
+      .grid {
+        margin: 0 auto;
+        max-width: 1200px;
+        width:100%
+      }
+      .row {
+        width: 100%;
+        margin-bottom:20px;
+        display: flex;
+      }
+      .col-4 {
+        width:33.33%
+      }
+      .col-6 {
+        width:50%
+      }
+
+      .col-12 {
+        width:100%;
+        margin: 0px;
+      }
+
+      img {
+          width: 100%;   
+      }
+
+      /* Animation */
+      .rotate {
+        animation: rotation 8s infinite linear;
+      }
+
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(359deg);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn ease 10s;
+        -webkit-animation: fadeIn ease 10s;
+        -moz-animation: fadeIn ease 10s;
+        -o-animation: fadeIn ease 10s;
+        -ms-animation: fadeIn ease 10s;
+      }
+      @keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+      }
+
+      @-moz-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+      }
+
+      @-webkit-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+      }
+
+      @-o-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
+      }
+
+      @-ms-keyframes fadeIn {
+        0% {opacity:0;}
+        100% {opacity:1;}
       }
     </style>
   </head>
   <body>
-    <button id="changeColor"></button>
+    <img src="./images/navBar.jpg"/>
+    
+    <!-- Images section -->
+    <div class="grid">
+      <div class="row">
+
+        <div class="col-4">
+          <img src="./images/smallFlower.gif" class="rotate" />
+        </div>
+
+        <div class="col-12">
+          <div class="fade-in">
+            <img src="./images/largeFlower.gif" class="rotate" />
+          </div>
+        </div>
+
+        <div class="col-6">
+          <img src="./images/smallFlower.gif" class="rotate" />
+        </div>
+      </div>
+      
+    </div> 
+
+
+    <!-- Audio progress bar -->
+    <button id="player" onClick="togglePlay()">
+      <audio id="myAudio" src="./audio.mp3" preload="auto"></audio>
+      <p id="controls">Click</p>
+    </button>
+
     <script src="popup.js"></script>
   </body>
 </html>

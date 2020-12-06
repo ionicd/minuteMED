@@ -4,8 +4,21 @@
 
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
+var myAudio = document.getElementById("myAudio");
+var ctrlTxt = document.getElementById("controls")
+var isPlaying = false;
+
+document.getElementById("player").addEventListener("click", togglePlay);
+
+function togglePlay() {
+  isPlaying ? myAudio.pause() : myAudio.play();
+};
+
+myAudio.onplaying = function() {
+  isPlaying = true;
+  ctrlTxt.innerHTML = "Pause";
+};
+myAudio.onpause = function() {
+  isPlaying = false;
+  ctrlTxt.innerHTML = "Resume";
+};
