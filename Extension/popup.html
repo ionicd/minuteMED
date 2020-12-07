@@ -1,6 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="Minute Meditation">
+
+  <meta name="Joanna Folk & Saurav (सौरभ केसी) KC" content="Minute Meditation">
     <!--
     Project Minute Meditation
     For Tech Takes on Mental Health
@@ -24,7 +31,7 @@
       }
 
       img {
-          width: 100%;   
+          width: 100%;
       }
 
       /* Animation */
@@ -64,15 +71,15 @@
 
   <body>
     <!-- Nav Bar -->
-    <img src="./images/navBar.jpg"/>
+    <img src="./images/navBar.jpg" alt="Navigation bar stating minute meditation"/>
 
     <!-- Grid -->
     <div class="row">
 
       <!-- Flower Images -->
-      <div class="cell"><img src="./images/smallFlower.gif" id="smallFlowerRight" class="fade-in" /></div>
-      <div class="cell"><img src="./images/largeFlower.gif" id="largeFlower" class="fade-in" /></div>
-      <div class="cell"><img src="./images/smallFlower.gif" id="smallFlowerLeft" class="fade-in" /></div>
+      <div class="cell"><img src="./images/smallFlower.gif" alt="a small flower illustration" id="smallFlowerRight" class="fade-in" /></div>
+      <div class="cell"><img src="./images/largeFlower.gif" alt="a large flower centered in the middle" id="largeFlower" class="fade-in" /></div>
+      <div class="cell"><img src="./images/smallFlower.gif" alt="another small flower illustration" id="smallFlowerLeft" class="fade-in" /></div>
 
     </div>
 
@@ -81,19 +88,19 @@
 
     <!-- Start Button -->
     <div class="cell">
-      <img id="play" onclick="changeImage()" src="images/playOff.png" class="fade-in" width="80" height="80">
+      <img id="play" onclick="changeImage()" alt="start meditation" src="images/playOff.png" class="fade-in" width="80" height="80">
     </div>
 
     <!-- Progress Button -->
     <div class="cell"><img src="images/barOne.gif" id="progress" class="fade-in" alt="progress bar"></div>
 
     <!-- Audio Player -->
-    <!-- Song by Siddhartha Corsus --- The Heart Sings -->
+    <!-- Song by Siddhartha Corsus - The Heart Sings -->
     <div class="cell">
       <audio id="audioFile">
         <source src="audio.mp3" type="audio/mpeg">
       </audio>
-      <a class='musicOff' href="#!"><img src="images/volumeOff.png" alt="audio button" class="fade-in" id="myImg"></a>
+      <a class='musicOff' href="#!"><img src="images/volumeOff.png" alt="start music" class="fade-in" id="myImg"></a>
     </div>
 
     <!-- End Quote -->
@@ -111,7 +118,7 @@
     <script src="https://khaalipaper.com/js/jquery-3.2.1.min.js"></script>
 
     <!-- Audio Script -->
-    <script type="text/javascript">
+    <script>
       function changeImg() {
         var image = document.getElementById('myImg');
         if (image.src.match("play-audio.png")) {
@@ -186,6 +193,18 @@
             document.getElementById('smallFlowerRight').className = "rotate";
           }, 60000);
 
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barFinishedOne.gif";
+          }, 60600);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barFinishedTwo.gif";
+          }, 60800);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barFinishedThree.gif";
+          }, 61000);
+
 
         }
 
@@ -200,6 +219,5 @@
 
     </script>
 
-    </div>
   </body>
 </html>
