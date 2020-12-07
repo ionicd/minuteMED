@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--
+    Project Minute Meditation
+    For Tech Takes on Mental Health
+    By: Joanna Folk & Saurav (सौरभ केसी) KC
+    Purpose: Sometimes we need a quick break from things.  A breather where we ground ourselves throughout the day.
+    That is why I decided to make a minute meditation app, that allows you to pause what you're doing and focus on your breathing.
+    -->
+
     <style>
       body {
         min-width:300px;
       }
-      /* limit on max width, I think it is 800px */
-      .grid {
-        margin: 0 auto;
-        max-width: 1200px;
-        width:100%
-      }
+      /* Grid */
       .row {
-        width: 100%;
-        margin-bottom:20px;
         display: flex;
-      }
-      .col-4 {
-        width:33.33%
-      }
-      .col-6 {
-        width:50%
-      }
-
-      .col-12 {
-        width:100%;
-        margin: 0px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        max-width: 600px;
+        justify-content: center;
+        align-items: center;
       }
 
       img {
@@ -47,69 +42,165 @@
       }
 
       .fade-in {
-        animation: fadeIn ease 10s;
-        -webkit-animation: fadeIn ease 10s;
-        -moz-animation: fadeIn ease 10s;
-        -o-animation: fadeIn ease 10s;
-        -ms-animation: fadeIn ease 10s;
+        animation: fadeIn ease 3s;
       }
       @keyframes fadeIn {
         0% {opacity:0;}
         100% {opacity:1;}
       }
 
-      @-moz-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
+      /* Audio Image */
+      #audioControl img {
+        width: 80px;
+        height: 80px;
       }
 
-      @-webkit-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-      }
-
-      @-o-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
-      }
-
-      @-ms-keyframes fadeIn {
-        0% {opacity:0;}
-        100% {opacity:1;}
+      #pause {
+        width: 80px;
+        height: 80px;
       }
     </style>
   </head>
+
   <body>
+    <!-- Nav Bar -->
     <img src="./images/navBar.jpg"/>
-    
-    <!-- Images section -->
-    <div class="grid">
-      <div class="row">
 
-        <div class="col-4">
-          <img src="./images/smallFlower.gif" class="rotate" />
-        </div>
+    <!-- Grid -->
+    <div class="row">
 
-        <div class="col-12">
-          <div class="fade-in">
-            <img src="./images/largeFlower.gif" class="rotate" />
-          </div>
-        </div>
+      <!-- Flower Images -->
+      <div class="cell"><img src="./images/smallFlower.gif" id="smallFlowerRight" class="fade-in" /></div>
+      <div class="cell"><img src="./images/largeFlower.gif" id="largeFlower" class="fade-in" /></div>
+      <div class="cell"><img src="./images/smallFlower.gif" id="smallFlowerLeft" class="fade-in" /></div>
 
-        <div class="col-6">
-          <img src="./images/smallFlower.gif" class="rotate" />
-        </div>
-      </div>
-      
-    </div> 
+    </div>
 
+    <!-- Second Row -->
+    <div class="row">
 
-    <!-- Audio progress bar -->
-    <button id="player" onClick="togglePlay()">
-      <audio id="myAudio" src="./audio.mp3" preload="auto"></audio>
-      <p id="controls">Click</p>
-    </button>
+    <!-- Start Button -->
+    <div class="cell">
+      <img id="play" onclick="changeImage()" src="images/playOff.png" class="fade-in" width="80" height="80">
+    </div>
+
+    <!-- Progress Button -->
+    <div class="cell"><img src="images/barOne.gif" id="progress" class="fade-in" alt="progress bar"></div>
+
+    <!-- Audio Player -->
+    <!-- Song by Siddhartha Corsus --- The Heart Sings -->
+    <div class="cell">
+      <audio id="audioFile">
+        <source src="audio.ogg" type="audio/ogg">
+        <source src="audio.mp3" type="audio/mpeg">
+      </audio>
+      <a class='musicOff' href="#!"><img src="images/volumeOff.png" alt="audio button" class="fade-in" id="myImg"></a>
+    </div>
+
+    <!-- End Quote -->
+    <div class="cell">
+      <img src="images/quote.gif" alt="End quote: Breathe conquers the mind" id="quote" style="display: none">
+      <img src="images/instructions.png" alt="Instructions: Be still and breathe in and out" id="instructions" style="display: none">
+    </div>
+
+    <!-- Preloaded Audio Gong -->
+    <audio id="alertSound" src="gong.mp3" preload="auto"></audio>
+    </div>
 
     <script src="popup.js"></script>
+
+    <script src="https://khaalipaper.com/js/jquery-3.2.1.min.js"></script>
+
+    <!-- Audio Script -->
+    <script type="text/javascript">
+      function changeImg() {
+        var image = document.getElementById('myImg');
+        if (image.src.match("play-audio.png")) {
+          image.src = "stop-audio.png";
+        }
+        else {
+          image.src = "play-audio.png";
+        }
+      }
+      $(document).ready(function(){
+        $(".musicOff").click(function(){
+          var image = document.getElementById('myImg');
+          var x = document.getElementById("audioFile");
+          x.play();
+          if (image.src.match("images/volumeOff.png")) {
+            image.src = "images/volumeOn.png";
+          }
+          else {
+            image.src = "images/volumeOff.png";
+            x.pause();
+          }
+        });
+      });
+    </script>
+
+    <!-- Play Button -->
+    <script>
+      let largeFlower = document.getElementById("largeFlower");
+      let smallFlowerRight = document.getElementById("smallFlowerRight");
+      let smallFlowerLeft = document.getElementById("smallFlowerLeft");
+
+      function changeImage()
+      {
+        element=document.getElementById('play')
+        if (element.src.match("Off"))
+        {
+          element.src="images/playOn.png";
+          largeFlower.className = "rotate";
+          document.getElementById('instructions').style.display = 'block';
+
+          // Down & dirty timer functions
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barTwo.gif";
+          }, 8571);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barThree.gif";
+          }, 17142);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barFour.gif";
+          }, 25713);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barFive.gif";
+          }, 34284);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barSix.gif";
+          }, 42855);
+
+          setTimeout(function(){
+            document.getElementById('progress').src = "images/barSeven.gif";
+          }, 51426);
+
+          setTimeout(function(){
+            document.getElementById('alertSound').play();
+            document.getElementById('quote').style.display = "block";
+            document.getElementById('instructions').style.display = 'none';
+            document.getElementById('progress').src = "images/barEight.gif";
+            document.getElementById('smallFlowerLeft').className = "rotate";
+            document.getElementById('smallFlowerRight').className = "rotate";
+          }, 60000);
+
+
+        }
+
+        /* TODO: Figure out how to stop prior timers - Pauses movement
+        else
+        {
+          element.src="images/playOff.png";
+          largeFlower.className = "";
+          document.getElementById('progress').src = "images/barOne.gif";
+        } */
+      }
+
+    </script>
+
+    </div>
   </body>
 </html>
